@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+﻿using DAL.Helper;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
-namespace DAL.Helper
+namespace DAL
 {
     public class DatabaseHelper : IDatabaseHelper
     {
@@ -16,6 +14,7 @@ namespace DAL.Helper
         public SqlConnection sqlConnection { get; set; }
         //NpgsqlTransaction 
         public SqlTransaction sqlTransaction { get; set; }
+
         public DatabaseHelper(IConfiguration configuration)
         {
             StrConnection = configuration["ConnectionStrings:DefaultConnection"];
@@ -915,13 +914,6 @@ namespace DAL.Helper
             }
             return result;
         }
-
-        // xử lý hàm này đi :v
-
-        //public object ExecuteScalarSProcedureWithTransaction(out string msgError, string v1, string v2, object maLoai, string v3, object tenSanPham, string v4, string anh, string v5, object soLuong, string v6, string mota, string v7, object ngayTao)
-        //{
-        //    throw new NotImplementedException();
-        //}
         #endregion
     }
 

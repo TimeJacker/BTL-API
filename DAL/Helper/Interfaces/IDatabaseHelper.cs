@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
-namespace DAL.Helper
+namespace DAL
 {
     public class StoreParameterInfo
     {
@@ -131,8 +128,7 @@ namespace DAL.Helper
         /// <param name="paramObjects">List Param Objects, Each Item include 'ParamName' and 'ParamValue'</param>
         /// <returns>List Object Result in query</returns>
         List<Object> ReturnValuesFromExecuteSProcedure(out string msgError, string sprocedureName, int outputParamCountNumber, params object[] paramObjects);
-        //anh, string v5, object soLuong, string v6, string mota, string v7, object ngayTao);
-        #endregion
+        #endregion 
     }
 
 }

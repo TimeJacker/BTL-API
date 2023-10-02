@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-
 
 namespace DAL
 {
@@ -16,7 +11,7 @@ namespace DAL
         private static readonly JsonSerializerSettings Settings;
         static MessageConvert()
         {
-            Settings = new JsonSerializerSettings()
+            Settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.None,
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -24,6 +19,7 @@ namespace DAL
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
         }
+
         public static string SerializeObject(this object obj)
         {
             if (obj == null)
@@ -83,6 +79,7 @@ namespace DAL
             var rows = enumerable.Skip(skip).Take(pageSize);
             return rows.ToList();
         }
+
         public static DataTable ConvertTo<T>(this IList<T> list)
         {
             DataTable table = CreateTable<T>();
@@ -199,6 +196,5 @@ namespace DAL
 
             return table;
         }
-
     }
 }
