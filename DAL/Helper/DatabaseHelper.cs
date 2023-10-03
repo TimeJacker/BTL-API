@@ -1,9 +1,9 @@
-﻿using DAL.Helper;
+﻿using DAL;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DAL
+namespace DataAccessLayer
 {
     public class DatabaseHelper : IDatabaseHelper
     {

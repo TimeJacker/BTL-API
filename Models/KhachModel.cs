@@ -1,4 +1,4 @@
-﻿namespace DataModel
+﻿namespace Models
 {
     public class KhachModel
     {

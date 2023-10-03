@@ -13,8 +13,8 @@ builder.Services.AddCors(options =>
 });
 // Add services to the container.
 builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
-//builder.Services.AddTransient<IKhachRepository, KhachRepository>();
-//builder.Services.AddTransient<IKhachBusiness, KhachBusiness>();
+builder.Services.AddTransient<IKhachRepository, KhachRepository>();
+builder.Services.AddTransient<IKhachBusiness, KhachBusiness>();
 //builder.Services.AddTransient<IHoaDonRepository, HoaDonRepository>();
 //builder.Services.AddTransient<IHoaDonBusiness, HoaDonBusiness>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
