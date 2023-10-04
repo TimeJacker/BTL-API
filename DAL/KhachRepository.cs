@@ -11,13 +11,27 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
-        public KhachModel GetDatabyID(string id)
+        public async Task<List<KhachModel>> GetAll()
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_id",
-                     "@id", id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "khach_getall");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<KhachModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<KhachModel> GetById(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_id", "@id", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<KhachModel>().FirstOrDefault();

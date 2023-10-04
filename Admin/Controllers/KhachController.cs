@@ -13,9 +13,12 @@ namespace Api.Controllers
     [ApiController]
     public class KhachController : ControllerBase
     {
-        private IKhachBusiness _khachBusiness;
+        private readonly IKhachBusiness _khachBusiness;
         private string _path;
         private IWebHostEnvironment _env;
+
+
+
         public KhachController(IKhachBusiness khachBusiness, IConfiguration configuration, IWebHostEnvironment env)
         {
             _khachBusiness = khachBusiness;
@@ -83,13 +86,17 @@ namespace Api.Controllers
                 throw ex;
             }
         }
-
-        ///   [AllowAnonymous]
-        [Route("get-by-id/{id}")]
+        [Route("get-all_khachhang")]
         [HttpGet]
-        public KhachModel GetDatabyID(string id)
+        public async Task<List<KhachModel>> GetAll()
         {
-            return _khachBusiness.GetDatabyID(id);
+            return await _khachBusiness.GetAll();
+        }
+        [Route("getbyID")]
+        [HttpGet]
+        public async Task<KhachModel> GetById(int id)
+        {
+            return await _khachBusiness.GetById(id);
         }
         [Route("create-khach")]
         [HttpPost]

@@ -11,9 +11,13 @@ namespace BLL
         {
             _res = res;
         }
-        public KhachModel GetDatabyID(string id)
+        public async Task<List<KhachModel>> GetAll()
         {
-            return _res.GetDatabyID(id);
+            return await _res.GetAll();
+        }
+        public async Task<KhachModel> GetById(int id)
+        {
+            return await _res.GetById(id);
         }
         public bool Create(KhachModel model)
         {
