@@ -1,9 +1,11 @@
-﻿using Models;
+﻿using Microsoft.Extensions.Configuration;
+using Models;
 
 namespace DAL
 {
     public class HoaDonRepository:IHoaDonRepository
     {
+       
         private IDatabaseHelper _dbHelper;
         public HoaDonRepository(IDatabaseHelper dbHelper)
         {
@@ -35,6 +37,7 @@ namespace DAL
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoadon_create",
                 "@TenKH", model.TenKH,
                 "@Diachi", model.Diachi,
+                "@GioiTinh", model.GioiTinh,
                 "@TrangThai", model.TrangThai,
                 "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))

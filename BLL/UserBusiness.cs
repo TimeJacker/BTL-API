@@ -24,19 +24,18 @@ namespace BLL
         {
             var user = _res.Login(username, password);
             if (user == null)
-            {
                 return null;
-            }
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secret);
+            var key = Encoding.ASCII.GetBytes(secret);              //create key
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] {
-                   new Claim(ClaimTypes.Name, user.TenTaiKhoan.ToString()),
-                   new Claim(ClaimTypes.Email, user.Email)
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.TenTaiKhoan.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)  // create token by encode key with data user
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.token = tokenHandler.WriteToken(token);
