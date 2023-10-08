@@ -24,7 +24,7 @@ namespace Admin.Controllers
             {
                 return BadRequest(new { message = "Tai khoan hoac mat khau khong dung!" });
             }
-            return Ok(new { taikhoan = user.TenTaiKhoan, email = user.Email, token = user.token });
+            return Ok(new { taikhoan = user.TenTaiKhoan, email = user.Email, Token = user.token });
         }
     }
 }

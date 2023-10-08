@@ -1,24 +1,20 @@
 ﻿using BLL;
-using Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Models;
 
-
-namespace Api.Controllers
+namespace Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class KhachController : ControllerBase
     {
-        private readonly IKhachBusiness _khachBusiness;
+        private IKhachBusiness _khachBusiness;
         private string _path;
         private IWebHostEnvironment _env;
-
-
-
         public KhachController(IKhachBusiness khachBusiness, IConfiguration configuration, IWebHostEnvironment env)
         {
             _khachBusiness = khachBusiness;
@@ -86,17 +82,13 @@ namespace Api.Controllers
                 throw ex;
             }
         }
-        [Route("get-all_khachhang")]
+
+        //[AllowAnonymous]
+        [Route("get-by-id/{id}")]
         [HttpGet]
-        public async Task<List<KhachModel>> GetAll()
+        public KhachModel GetDatabyID(string id)
         {
-            return await _khachBusiness.GetAll();
-        }
-        [Route("getbyID")]
-        [HttpGet]
-        public async Task<KhachModel> GetById(int id)
-        {
-            return await _khachBusiness.GetById(id);
+            return _khachBusiness.GetDatabyID(id);
         }
         [Route("create-khach")]
         [HttpPost]

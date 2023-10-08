@@ -1,8 +1,7 @@
 ﻿using DAL;
 using Models;
 
-
-namespace DAL
+namespace DataAccessLayer
 {
     public class KhachRepository : IKhachRepository
     {
@@ -11,27 +10,13 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
-        public async Task<List<KhachModel>> GetAll()
+        public KhachModel GetDatabyID(string id)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "khach_getall");
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<KhachModel>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public async Task<KhachModel> GetById(int id)
-        {
-            string msgError = "";
-            try
-            {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_id", "@id", id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_khach_get_by_id",
+                     "@id", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<KhachModel>().FirstOrDefault();
