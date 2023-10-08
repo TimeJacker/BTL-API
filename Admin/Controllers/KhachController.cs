@@ -104,6 +104,13 @@ namespace Admin.Controllers
             _khachBusiness.Update(model);
             return model;
         }
+        [Route("delete-khach")]
+        [HttpDelete]
+        public IActionResult DeleteItem(string id)
+        {
+            _khachBusiness.Delete(id);
+            return Ok(id);
+        }
         [Route("search")]
         [HttpPost]
         public IActionResult Search([FromBody] Dictionary<string, object> formData)
