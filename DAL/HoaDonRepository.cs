@@ -38,6 +38,13 @@ namespace DAL
                 "@TenKH", model.TenKH,
                 "@Diachi", model.Diachi,
                 "@GioiTinh", model.GioiTinh,
+                "@NgayTao", model.NgayTao,
+                "@NgayDuyet", model.NgayDuyet,
+                "@TongGia", model.TongGia,
+                "@Email", model.Email,
+                "@SDT", model.SDT,
+                "@DiaChiGiaoHang", model.DiaChiGiaoHang,
+                "@ThoiGianGiaoHang", model.ThoiGianGiaoHang,
                 "@TrangThai", model.TrangThai,
                 "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
@@ -60,6 +67,7 @@ namespace DAL
                     "@MaHoaDon", model.MaHoaDon,
                     "@TenKH", model.TenKH,
                     "@Diachi", model.Diachi,
+                    "@GioiTinh",model.GioiTinh,
                     "@TrangThai", model.TrangThai,
                     "@list_json_chitiethoadon", model.list_json_chitiethoadon != null ? MessageConvert.SerializeObject(model.list_json_chitiethoadon) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
@@ -72,6 +80,31 @@ namespace DAL
             {
                 throw ex;
             }
+        }
+        public bool Delete(int id)
+        {
+            string msgError = "";
+            bool kq; // Khởi tạo mặc định là false
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedure(out msgError, "sp_hoadon_delete",
+                     "@MaHoaDon", id);
+                // Kiểm tra kết quả trả về từ hàm ExecuteScalarSProcedureWithTransaction
+                if (Convert.ToInt32(result) > 0)
+                {
+                    kq = true; // Xóa thành công, đặt kq thành true
+                }
+                else
+                {
+                    kq = false;
+                }
+                return kq;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
         public List<ThongKeKhachModel> Search(int pageIndex, int pageSize,out long total,string ten_khach, DateTime? fr_NgayTao,DateTime? to_NgayTao) 
         {
