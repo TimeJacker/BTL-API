@@ -47,10 +47,10 @@ namespace Admin.Controllers
         {
             try
             {
-                var page = int.Parse(formData["page"].ToString());
+                var pageIndex = int.Parse(formData["pageIndex"].ToString());
                 var pageSize = int.Parse(formData["pageSize"].ToString());
                 string ten_khach = "";
-                if (formData.Keys.Contains("ten_khach") && !string.IsNullOrEmpty(Convert.ToString(formData["ten_khach"]))) { ten_khach = Convert.ToString(formData["ten"]); }
+                if (formData.Keys.Contains("ten_khach") && !string.IsNullOrEmpty(Convert.ToString(formData["ten_khach"]))) { ten_khach = Convert.ToString(formData["ten_khach"]); }
                 DateTime? fr_NgayTao= null;
                 if(formData.Keys.Contains("fr_NgayTao") && formData["fr_NgayTao"]!=null && formData["fr_NgayTao"].ToString() != "")
                 {
@@ -64,12 +64,12 @@ namespace Admin.Controllers
                     to_NgayTao = new DateTime(dt.Year, dt.Month, dt.Day,23,59,59,999);
                 }
                 long total = 0;
-                var data = _hoadonBusiness.Search(page,pageSize,out total,ten_khach,fr_NgayTao,to_NgayTao);
+                var data = _hoadonBusiness.Search(pageIndex, pageSize,out total,ten_khach,fr_NgayTao,to_NgayTao);
                 return Ok(new
                 {
                     TotalItems = total,
                     Data = data,
-                    Page = page,
+                    PageIndex = pageIndex,
                     PageSize = pageSize
                 }
                 );
