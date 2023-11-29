@@ -117,7 +117,6 @@ namespace Admin.Controllers
         {
             try
             {
-                //var page = int.Parse(formData["page"].ToString());
                 var pageSize = int.Parse(formData["pageSize"].ToString());
                 var pageIndex = int.Parse(formData["pageIndex"].ToString());
                 string ten_khach = "";

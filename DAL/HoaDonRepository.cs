@@ -113,7 +113,7 @@ namespace DAL
             }
 
         }
-        public List<ThongKeKhachModel> Search(int pageIndex, int pageSize,out long total,string ten_khach, DateTime? fr_NgayTao,DateTime? to_NgayTao) 
+        public List<HoaDonModel> Search(int pageIndex, int pageSize,out long total,string ten_khach, DateTime? fr_NgayTao,DateTime? to_NgayTao) 
         {
             string msgError = "";
             total = 0;
@@ -132,7 +132,7 @@ namespace DAL
                 }
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 { 
-                return dt.ConvertTo<ThongKeKhachModel>().ToList();
+                return dt.ConvertTo<HoaDonModel>().ToList();
                 }
             }
             catch(Exception ex)
